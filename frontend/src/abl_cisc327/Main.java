@@ -97,11 +97,37 @@ public class Main {
 		isUserAgent = false;
 	}
 	
+	//Allows users to put specified amount of money in their accounts.
+	private static void deposit(){
+		System.out.print("Enter the account to deposit: ");
+		String depositAccountStr = input.nextLine();
+		System.out.print("Enter the amount to deposit: ");
+		String depositAmountStr = input.nextLine();
+		
+		if(!isUserLoggedin) {
+			// No transaction (deposit) other than login should be accepted before login
+			System.out.println("ERROR: You need to login first");
+			return;
+		}
+		
+		int depositAmount = validateAmount(depositAmountStr);
+		int depositAccount = validateAccountNumber(accountStr);
+		
+		if(!validAccounts.isValid(depositAccount)){
+			System.out.println("ERROR: invalid account number");
+			return;
+		}
+		
+		transactions.addCommand("DEP", depositAccount, depositAmount,0,null);
+		System.out.printf("You have successfully deposited $%.2f to %d", ((float) depositAmount)/100, depositAccount");
+	}
+	
 	//When taking out specified amount of money, 
 	//the method ensures the amount is correct and it is not more than the limit. 
 	private static void withdraw(){
 		System.out.print("Enter amount to withdraw: ");
 		String amount = input.nextLine();
+		
 		
 		
 		if(!isUserLoggedin) {
@@ -117,7 +143,7 @@ public class Main {
 		}
 		else{
 			transactions.addCommand("WDR",accountNumber,withdrawAmount,0,null);
-			System.out.println(""You have successfully tranferred $%.2f to %d", ((float) transferAmount)/100, fromAccountNumber");
+			System.out.printf("You have successfully tranferred $%.2f to %d", ((float) transferAmount)/100, fromAccountNumber");
 		}
 	}
 	
