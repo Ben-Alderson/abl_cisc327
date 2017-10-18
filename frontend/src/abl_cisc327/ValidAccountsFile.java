@@ -20,6 +20,7 @@ public class ValidAccountsFile {
 			Integer number = Integer.parseInt(reader.nextLine(), 10);
 			validNumbers.add(number);
 		}
+		reader.close();
 	}
 	
 	/*
