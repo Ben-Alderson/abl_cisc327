@@ -1,5 +1,7 @@
 package abl_cisc327;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // The Main class is to parse and execute commands and core functions of the program.
@@ -14,10 +16,20 @@ public class Main {
 	// The purpose of this function is to call on all the 
 	// essential methods (withdraw, transfer) and classes (TransactionSummaryFile, ValidAccountsFile). 
 	public static void main(String[] args) {
+		if(args.length < 2) {
+			System.out.println("usage: frontend valid_accounts_file transaction_summary_file");
+			System.exit(1);
+		}
+		
 		input = new Scanner(System.in);
 		
-		validAccounts = new ValidAccountsFile(args[1]);
-		transactions = new TransactionSummaryFile(args[2]);
+		try {
+			validAccounts = new ValidAccountsFile(args[0]);
+		} catch (FileNotFoundException e1) {
+			System.out.println("Valid accounts file not found");
+			System.exit(1);
+		}
+		transactions = new TransactionSummaryFile(args[1]);
 
 		while(true) {
 			System.out.print("Enter command: ");
@@ -95,6 +107,39 @@ public class Main {
 		
 		isUserLoggedin = false;
 		isUserAgent = false;
+		
+		transactions.addCommand("EOS", 0, 0, 0, null);
+		try {
+			transactions.flush();
+		} catch (IOException e) {
+			System.out.println("Transaction file could not be written.");
+			System.exit(1);
+		}
+	}
+	
+	//Allows users to put specified amount of money in their accounts.
+	private static void deposit() throws Exception{
+		System.out.print("Enter the account to deposit: ");
+		String depositAccountStr = input.nextLine();
+		System.out.print("Enter the amount to deposit: ");
+		String depositAmountStr = input.nextLine();
+		
+		if(!isUserLoggedin) {
+			// No transaction (deposit) other than login should be accepted before login
+			System.out.println("ERROR: You need to login first");
+			return;
+		}
+		
+		int depositAmount = validateAmount(depositAmountStr);
+		int depositAccount = validateAccountNumber(depositAccountStr);
+		
+		if(!validAccounts.isValid(depositAccount)){
+			System.out.println("ERROR: invalid account number");
+			return;
+		}
+		
+		transactions.addCommand("DEP", depositAccount, depositAmount, 0, null);
+		System.out.printf("You have successfully deposited $%.2f to %d", ((float) depositAmount)/100, depositAccount);
 	}
 	
 	// When taking out specified amount of money, 
@@ -104,6 +149,7 @@ public class Main {
 		String accountNumberStr = input.nextLine();
 		System.out.print("Enter amount to withdraw: ");
 		String amountStr = input.nextLine();
+		
 		
 		
 		if(!isUserLoggedin) {

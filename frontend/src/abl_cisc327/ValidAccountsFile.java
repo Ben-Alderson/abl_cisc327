@@ -15,9 +15,14 @@ public class ValidAccountsFile {
 	 * Loads the valid accounts file from the path given in the argument.
 	 */
 	public ValidAccountsFile(String file) throws FileNotFoundException {
+		validNumbers = new HashSet<Integer>();
+		
 		Scanner reader = new Scanner(new File(file));
 		while(reader.hasNextLine()) {
 			Integer number = Integer.parseInt(reader.nextLine(), 10);
+			if(number == 0) {
+				break;
+			}
 			validNumbers.add(number);
 		}
 		reader.close();
