@@ -2,12 +2,15 @@ package abl_cisc327;
 
 import java.util.Scanner;
 
+//The Main class is to parse and execute commands and core functions of the program.
 public class Main {
 	
 	static boolean isUserLoggedin = false;
 	static boolean isUserAgent = false;
 	static Scanner input;
 	
+	//The purpose of this function is to call on all the 
+	//essential methods (withdraw, transfer) and classes (TransactionSummaryFile, ValidAccountsFile). 
 	public static void main(String[] args) {
 		input = new Scanner(System.in);
 		
@@ -20,23 +23,40 @@ public class Main {
 			
 			String command = input.nextLine();
 			
-			switch(command) {
-			case "login":
-				login();
-				break;
-			case "logout":
-				logout();
-				break;
-			case "createacct":
-				createacct();
-				break;
-			default:
-				System.out.println("ERROR: Invalid command");
-				break;
+			try{
+				switch(command) {
+				case "login":
+					login();
+					break;
+				case "logout":
+					logout();
+					break;
+				case "deleteacct":
+					deleteacct();
+					break;
+				case "createacct":
+					createacct();
+					break;
+				case "transfer":
+					transfer();
+					break;
+				case "withdraw":
+					withdraw();
+					break;
+				case "deposit":
+					deposit();
+					break;
+				default:
+					System.out.println("ERROR: Invalid command");
+					break;
+				}
+			}catch(Exception e){
+				continue;
 			}
 		}
 	}
 	
+	//Makes sure first thing the user sees on screen is a login page.
 	private static void login() {
 		System.out.print("Enter login: ");
 		String user = input.nextLine().toLowerCase();
@@ -60,6 +80,7 @@ public class Main {
 		}
 	}
 	
+	//User exits the session and gets the transaction summary file.
 	private static void logout() {
 		if(!isUserLoggedin) {
 			// Logout should only be accepted when logged in
@@ -71,6 +92,67 @@ public class Main {
 		isUserAgent = false;
 	}
 	
+	//When taking out specified amount of money, 
+	//the method ensures the amount is correct and it is not more than the limit. 
+	private static void withdraw(){
+		System.out.print("Enter amount to withdraw: ");
+		String amount = input.nextLine();
+		
+		if(!isUserLoggedin) {
+			// No transaction (withdraw) other than login should be accepted before login
+			System.out.println("ERROR: You need to login first");
+			return;
+		}
+		
+		int withdrawAmount = Integer.parseInt(amount);
+		if(withdrawAmount < 0 || withdrawAmount > 1000){
+			//specification of limit
+			System.out.println("Can't withdraw money below 0 or over 1000 in ATM mode");
+		}
+		else{
+			transactions.addCommand("WDR",accountNumber,withdrawAmount,0,null);
+			System.out.println("Money withdrawn successfully")
+		}
+	}
+	
+	//Ensures the accounts information and amount transferred are correct 
+	//before proceeding with the process.
+	private static void transfer() throws Exception{
+		System.out.println("Enter the account number to transfer from");
+		String fromAccountNumberStr = input.nextLine();
+		System.out.println("Enter the account number to transfer to");
+		String toAccountNumberStr = input.nextLine();
+		System.out.println("Enter amount to transfer");
+		String amount = input.nextLine();
+	
+		
+		if(!isUserLoggedin) {
+			// No transaction (transfer) other than login should be accepted before login
+			System.out.println("ERROR: You need to login first");
+			return;
+		}
+		
+		int transferAmount = Integer.parseInt(amount);
+		int fromAccountNumber = validateAccountNumber(fromAccountNumberStr);
+		int toAccountNumber = validateAccountNumber(toAccountNumberStr);
+		
+		//check for atm mode and amount
+		if((transferAmount<0 || transferAmount > 100000)){
+			System.out.println("ERROR: In");
+			return;
+		}
+		else if((transferAmount<0 || transferAmount > 99999999) && !isUserAgent){
+			System.out.println("ERROR: In");
+			return;
+		}
+		
+		//working case
+		
+		
+		
+	}
+	
+	//Allows agent to create an account.
 	private static void createacct() {
 		String inputNumber = input.nextLine();
 		String inputName = input.nextLine();
@@ -98,6 +180,8 @@ public class Main {
 		// TODO: Process transaction
 	}
 		
+	
+	//Allows agents to delete an account
 	private static int validateAccountNumber(String number) throws Exception {
 		int accountNumber;
 		
