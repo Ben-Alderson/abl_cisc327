@@ -7,6 +7,8 @@ public class Main {
 	
 	static boolean isUserLoggedin = false;
 	static boolean isUserAgent = false;
+	static ValidAccountsFile validAccounts;
+	static TransactionSummaryFile transactions;
 	static Scanner input;
 	
 	//The purpose of this function is to call on all the 
@@ -14,6 +16,9 @@ public class Main {
 	public static void main(String[] args) {
 		input = new Scanner(System.in);
 		
+		validAccounts = new ValidAccountsFile(args[1]);
+		transactions = new TransactionsSummaryFile(args[2]);
+
 		while(true) {
 			System.out.print("Enter command: ");
 			
@@ -98,6 +103,7 @@ public class Main {
 		System.out.print("Enter amount to withdraw: ");
 		String amount = input.nextLine();
 		
+		
 		if(!isUserLoggedin) {
 			// No transaction (withdraw) other than login should be accepted before login
 			System.out.println("ERROR: You need to login first");
@@ -111,7 +117,7 @@ public class Main {
 		}
 		else{
 			transactions.addCommand("WDR",accountNumber,withdrawAmount,0,null);
-			System.out.println("Money withdrawn successfully")
+			System.out.println(""You have successfully tranferred $%.2f to %d", ((float) transferAmount)/100, fromAccountNumber");
 		}
 	}
 	
@@ -138,13 +144,24 @@ public class Main {
 		
 		//check for atm mode and amount
 		if((transferAmount<0 || transferAmount > 100000)){
-			System.out.println("ERROR: In");
+			System.out.println("ERROR: Can't transfer more than $1,000.00");
 			return;
 		}
 		else if((transferAmount<0 || transferAmount > 99999999) && !isUserAgent){
-			System.out.println("ERROR: In");
+			System.out.println("ERROR: Can't transfer more than $999,999.99");
 			return;
 		}
+	
+		
+		//check if accounts exist 
+		if(!validAccounts.isValid(fromAccountNumber) || !validAccounts.isValid(toAcountNumber)){
+			System.out.println("ERROR: invalid account number");
+			return;
+		}
+		
+		transactions.addCommand ("XFR",toAccountNumber, transferAmount, fromAccountNumber,null);
+		System.out.printf("You have successfully tranferred $%.2f to %d", ((float) transferAmount)/100, toAccountNumber);
+		
 		
 		//working case
 		
