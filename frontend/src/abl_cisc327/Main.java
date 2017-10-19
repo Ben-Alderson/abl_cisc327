@@ -166,7 +166,7 @@ public class Main {
 		}
 		
 		transactions.addCommand("WDR", 0, withdrawAmount, accountNumber, null);
-		System.out.printf("You have successfully withdrawn $%.2f to %d\n", ((float) withdrawAmount)/100, accountNumber);
+		System.out.printf("You have successfully withdrawn $%.2f from %d\n", ((float) withdrawAmount)/100, accountNumber);
 	}
 	
 	// Ensures the accounts information and amount transferred are correct 
@@ -179,7 +179,6 @@ public class Main {
 		System.out.print("Enter amount to transfer: ");
 		String amount = input.nextLine();
 	
-		
 		if(!isUserLoggedin) {
 			// No transaction (transfer) other than login should be accepted before login
 			System.out.println("ERROR: You need to login first");
