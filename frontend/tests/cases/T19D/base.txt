@@ -1,0 +1,18 @@
+Test  T19D: Transfer with invalid second account number, error case
+Purpose: Transfer to an invalid account number
+Input t19Din.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    10000
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t19Dout.txt:
+    error(Invalid account number)
+

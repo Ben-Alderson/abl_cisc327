@@ -1,0 +1,22 @@
+Test  T17B: More than $1,000.00 is withdrawn from a single account in single ATM session, error case
+Purpose: Total of at most $1,000.00 can be withdrawn from a single account in a single ATM session
+Input t17Bin.txt:
+    login
+    atm
+withdraw
+    7488316
+    1000
+    withdraw
+    7488316
+    001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    WDR 7488316 1000 0000000 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t17Bout.txt:
+    error(You cannot withdraw more than $1,000.00 from a single account in a single ATM session)
+
+

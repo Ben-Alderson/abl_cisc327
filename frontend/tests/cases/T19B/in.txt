@@ -1,0 +1,7 @@
+login
+agent
+transfer
+7488316
+1234567
+100000000
+logout

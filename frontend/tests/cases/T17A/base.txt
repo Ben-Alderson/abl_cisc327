@@ -1,0 +1,18 @@
+Test  T17A: withdraw more than $1,000.00 in ATM mode, error case
+Purpose: withdrawal above $1,000.00 should be rejected in ATM mode
+Input t17Ain.txt:
+    login
+    atm
+withdraw
+    7488316
+    1001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t17Aout.txt:
+    error(You cannot withdraw more than $1,000.00)
+
+

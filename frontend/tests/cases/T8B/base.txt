@@ -1,0 +1,18 @@
+Test  T8B:  No transactions allowed after a logout, error case
+Purpose: No transaction (withdraw) other than login should be accepted after a logout
+Input t8Bin.txt:
+    login
+    atm
+    logout
+    withdraw
+    1234567
+    001
+Input files: Valid Accounts File: 
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Bout.txt:
+    error(You must login to withdraw)
+
+

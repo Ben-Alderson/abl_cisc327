@@ -1,0 +1,18 @@
+Test  T5B:privileged transactions are accepted, error case  
+Purpose:After ATM login, only unprivileged transactions are accepted
+Input t5Bin.txt:
+    login
+    atm
+    deleteacct
+    1123142
+    name
+    logout
+Input files: Valid Accounts File:
+    1123142
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t5Bout.txt:
+    error(You cannot delete account)
+
+

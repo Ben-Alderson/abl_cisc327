@@ -1,0 +1,6 @@
+login
+agent 
+createacct
+0111111
+name
+logout

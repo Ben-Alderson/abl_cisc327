@@ -1,0 +1,20 @@
+Test  T19A: Transfer more than $1,000.00, error case
+Purpose: transfers of over $1,000.00 in atm mode should be rejected
+Input t19Ain.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    100001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    1234567
+    0000000
+Output files: Transaction Summary File:
+EOS 0000000 000 0000000 ***
+Terminal output t19Aout.txt:
+    error(You cannot transfer more than $1,000.00)
+
+

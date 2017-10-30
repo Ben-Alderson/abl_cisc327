@@ -1,0 +1,22 @@
+Test  T6: logout command, working case 
+Purpose: Check that logout command allows logging in later
+Input t6in.txt:
+    login 
+    atm
+    logout
+    login
+    agent
+    logout
+login
+    atm
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+EOS 0000000 000 0000000 ***
+EOS 0000000 000 0000000 ***
+Terminal output t6out.txt:
+    message(You have successfully logged out)
+
+

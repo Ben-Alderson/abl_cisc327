@@ -1,0 +1,19 @@
+Test  T16: withdraw to an account, working case
+Purpose: successful withdraw from an account
+Input t16in.txt:
+    login
+    atm
+withdraw
+    7488316
+    1000
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    WDR 0000000 1000 7488316 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t16out.txt:
+    message(You have successfully withdrawn $1,000.00 from 7488316)
+
+

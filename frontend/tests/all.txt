@@ -1,0 +1,853 @@
+Test  T1: login command,ATM case 
+Purpose: check that login is accepted 
+Input t1in.txt:
+    login 
+    atm 
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t1out.txt:
+    message(You have successfully logged out)
+
+
+Test  T2: login command, ATM error case 
+Purpose: check that invalid login is not accepted
+Input t2in.txt:
+    login 
+    invalid
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t2out.txt:
+    error(Invalid login)
+
+
+Test  T3: login twice, error case  
+Purpose:to check no subsequent login should be accepted after a login
+Input t3in.txt:
+    login
+atm 
+    login
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t3out.txt:
+    error(You must first log out to log in)
+
+
+Test  T4A: Transaction occur before login, error case  
+Purpose: No transaction (deposit) other than login should be accepted before login
+Input t4Ain.txt:
+    deposit
+    1112231
+    001
+Input files: Valid Accounts File:
+    1112231
+    0000000
+Output files: Transaction Summary File with no transaction
+Terminal output t4Aout.txt:
+    error(You need to login first)
+
+
+Test  T4B: Transaction occur before login, error case  
+Purpose: No transaction (withdraw) other than login should be accepted before login
+Input t4Bin.txt:
+    withdraw
+1112231
+    001
+Input files: Valid Accounts File:
+    1112231
+    0000000
+Output files: Transaction Summary File with no transaction
+Terminal output t4Bout.txt:
+    error(You need to login first)
+
+
+Test  T4C: Transaction occur before login, error case  
+Purpose: No transaction (transfer) other than login should be accepted before login
+Input t4Cin.txt:
+    transfer
+1112231
+1442234
+    001
+Input files: Valid Accounts File:
+    1112231
+    1442234
+    0000000
+Output files: Transaction Summary File with no transaction
+Terminal output t4Cout.txt:
+    error(You need to login first)
+
+
+Test  T4D: Transaction occur before login, error case  
+Purpose: No transaction (createacct) other than login should be accepted before login
+Input t4Din.txt:
+    createacct
+    1234534
+    name
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File with no transaction
+Terminal output t4Dout.txt:
+    error(You need to login first)
+
+
+Test  T4E: Transaction occur before login, error case  
+Purpose: No transaction (deleteacct) other than login should be accepted before login
+Input t4Ein.txt:
+    deleteacct
+    1234534
+    name
+Input files: Valid Accounts File:
+1234534
+0000000 
+Output files: Transaction Summary File with no transaction
+Terminal output t4Eout.txt:
+    error(You need to login first)
+
+
+Test  T5A:privileged transactions are accepted, error case  
+Purpose:After ATM login, only unprivileged transactions are accepted
+Input t5Ain.txt:
+    login
+    atm
+    createacct
+    1123142
+    name
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t5Aout.txt:
+    error(You cannot create account)
+
+
+Test  T5B:privileged transactions are accepted, error case  
+Purpose:After ATM login, only unprivileged transactions are accepted
+Input t5Bin.txt:
+    login
+    atm
+    deleteacct
+    1123142
+    name
+    logout
+Input files: Valid Accounts File:
+    1123142
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t5Bout.txt:
+    error(You cannot delete account)
+
+
+Test  T6: logout command, working case 
+Purpose: Check that logout command allows logging in later
+Input t6in.txt:
+    login 
+    atm
+    logout
+    login
+    agent
+    logout
+login
+    atm
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+EOS 0000000 000 0000000 ***
+EOS 0000000 000 0000000 ***
+Terminal output t6out.txt:
+    message(You have successfully logged out)
+
+
+Test  T7: logout without login, error case 
+Purpose: Logout should only be accepted when logged in 
+Input t7in.txt:
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File with no transaction
+Terminal output t7out.txt:
+    error(You must login before you can log out)
+
+
+Test  T8A:  No transactions allowed after a logout, error case
+Purpose: No transaction (deposit) other than login should be accepted after a logout
+Input t8Ain.txt:
+    login
+    atm
+    logout
+    deposit
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Aout.txt:
+    error(You must login to deposit)
+
+
+Test  T8B:  No transactions allowed after a logout, error case
+Purpose: No transaction (withdraw) other than login should be accepted after a logout
+Input t8Bin.txt:
+    login
+    atm
+    logout
+    withdraw
+    1234567
+    001
+Input files: Valid Accounts File: 
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Bout.txt:
+    error(You must login to withdraw)
+
+
+Test  T8C:  No transactions allowed after a logout, error case
+Purpose: no transaction (transfer) other than login should be accepted after a logout
+Input t8Cin.txt:
+    login
+    atm
+    logout
+    transfer
+    1234567
+    7654321
+    001
+Input files: Valid Accounts File:
+    7654321
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Cout.txt:
+    error(You must login to transfer)
+
+
+Test  T8D:  No transactions allowed after a logout, error case
+Purpose: No transaction (createacct) other than login should be accepted after a logout
+Input t8Din.txt:
+    login
+    atm
+    logout
+    createacct
+    1234567
+    name
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Dout.txt:
+    error(You must login to create accounts)
+
+
+Test  T8E:  No transactions allowed after a logout, error case
+Purpose: No transaction (deleteacct) other than login should be accepted after a logout
+Input t8Ein.txt:
+    login
+    atm
+    logout
+    deleteacct
+    1234567
+    name
+Input files: Valid Accounts File:
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Eout.txt:
+    error(You must login to delete accounts)
+
+
+Test  T9:  createacct, working case
+Purpose: To test that a valid use of createacct works.
+Input t9in.txt:
+    login
+    agent
+    createacct
+    1123663
+    Account Name
+logout    
+Input files:  Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    NEW 1123663 000 0000000 Account Name
+    EOS 0000000 000 0000000 ***
+Terminal output t9out.txt:
+    message(You have successfully created a new account)
+
+
+Test  T10A: createacct(account number not 7), error case
+Purpose: New account number is exactly seven decimal digits 
+Input t10Ain.txt:
+    login
+    agent
+    createacct
+666666
+name
+logout
+Input files:  Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t10Aout.txt:
+    error(You must have account with 7 decimal digits)
+
+
+Test  T10B: createacct(account number beginning with 0), error case
+Purpose: New account number not beginning with 0
+Input t10Bin.txt:
+    login
+    agent 
+createacct
+    0111111
+    name
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t10Bout.txt:
+    error(You must have account start with number other than 0)
+
+
+Test  T10C: createacct(account number exists), error case
+Purpose: To test one can not create two accounts with same account number in single session
+Input t10Cin.txt:
+    login
+    agent 
+createacct
+    1234567
+    first_name
+    createacct
+    1234567
+    second_name
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    NEW 1234567 000 0000000 first_name
+    EOS 0000000 000 0000000 ***
+Terminal output t10Cout.txt:
+    error(Your account number must be different from other current account numbers)
+
+
+Test  T10D: createacct(account number exists), error case
+Purpose: New account number must not already exist 
+Input t10Din.txt:
+    login
+    agent 
+    createacct
+    1234567
+    second_name
+logout    
+Input files: Valid Accounts File:
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t10Dout.txt:
+    error(Your account number must be different from other current account numbers)
+
+
+Test  T10E: createacct(account number not a number), error case
+Purpose: new account number must contain all numbers
+Input t10Ein.txt:
+    login
+    agent 
+createacct
+    3123a37
+    name
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t10Eout.txt:
+    error(New account number must be 7 numeric digits)
+
+
+Test  T11A: createacct(account name between 3 and 30 alphanumeric characters), error case
+Purpose: new account name under the minimum of 3 alphanumeric characters
+Input t11Ain.txt:
+    login
+    agent 
+createacct
+    2222222
+    aa
+logout    
+Input files:  Valid Accounts File:
+    0000000
+Output files: 
+Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t11Aout.txt:
+    error(Your account name must be between 3 and 30 alphanumeric characters)
+
+
+Test  T11B: createacct(account name between 3 and 30 alphanumeric characters), error case
+Purpose: new account name over the maximum of 30 alphanumeric characters
+Input t11Bin.txt:
+    login
+    agent 
+createacct
+    1111111
+    0123456789012345678901234567890
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t11Bout.txt:
+    error(Your account name must be between 3 and 30 alphanumeric characters and not begin or end with a space)
+
+
+Test  T11C: createacct(account name 30 alphnumeric characters), working case
+Purpose: new account name at the maximum of 30 characters
+Input t11Cin.txt:
+    login
+    agent 
+createacct
+    2222222
+    012345678901234567890123456789
+logout    
+Input files:  Valid Accounts File:
+    0000000
+Output files: 
+Transaction Summary File:
+NEW 2222222 000 0000000 012345678901234567890123456789
+    EOS 0000000 000 0000000 ***
+Terminal output t11Cout.txt:
+    message(You have successfully created a new account)
+
+
+Test  T11D: createacct(account name starts with a space), error case
+Purpose: New account name does not begin with a space
+Input t11Din.txt:
+    login
+    agent 
+createacct
+    1111111
+     name
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t11Dout.txt:
+    error(Your account name must not start or end with a space)
+
+
+Test  T11E: createacct(account name starts with a space), error case
+Purpose: New account name does not end with a space
+Input t11Ein.txt:
+    login
+    agent 
+createacct
+    1111111
+    name  .
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t11Eout.txt:
+    error(Your account name must not start or end with a space)
+
+
+Test  T11F: createacct(account name 3 alphnumeric characters), working case
+Purpose: New account name at the minimum of 3 characters
+Input t11Fin.txt:
+    login
+    agent 
+createacct
+    2222222
+    aaa
+logout    
+Input files:  Valid Accounts File:
+    0000000
+Output files: 
+Transaction Summary File:
+NEW 2222222 000 0000000 aaa
+    EOS 0000000 000 0000000 ***
+Terminal output t11Fout.txt:
+    message(You have successfully created a new account)
+
+
+Test  T12: deleteacct, working case
+Purpose: Delete an existing account 
+Input t12in.txt:
+    login
+    agent 
+deleteacct
+    7488316
+    name
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    DEL 7488316 000 0000000 name
+    EOS 0000000 000 0000000 ***
+Terminal output t12out.txt:
+    message(Account deleted)
+
+
+Test  T13A: Transactions are accepted on a deleted account, error case
+Purpose: no further transactions (deposit) should be accepted on a deleted account
+Input t13Ain.txt:
+    login
+    agent 
+deleteacct
+    7965211
+    name
+    deposit
+    7965211
+    001
+logout    
+Input files: Valid Accounts File:
+    7965211
+    0000000
+Output files: Transaction Summary File:
+    DEL 7965211 000 0000000 name
+    EOS 0000000 000 0000000 ***
+Terminal output t13Aout.txt:
+    error(This account does not exist)
+
+
+Test  T13B: Transactions are accepted on a deleted account, error case
+Purpose: No further transactions (withdraw) should be accepted on a deleted account
+Input t13Bin.txt:
+    login
+    agent 
+deleteacct
+    7965211
+    name
+    withdraw
+    7965211
+    001
+logout    
+Input files: Valid Accounts File:
+    7965211
+    0000000
+Output files: Transaction Summary File:
+    DEL 7965211 000 0000000 name
+    EOS 0000000 000 0000000 ***
+Terminal output t13Bout.txt:
+    error(This account does not exist)
+
+
+Test  T13C: Transactions are accepted on a deleted account, error case
+Purpose: No further transactions (transfer) should be accepted on a deleted account
+Input t13Cin.txt:
+    login
+    agent
+deleteacct
+    7965211
+    name
+    transfer
+    7965211
+    1234567
+    001
+logout    
+Input files: Valid Accounts File:
+    7965211
+1234567
+0000000
+Output files: Transaction Summary File:
+    DEL 7965211 000 0000000 name
+    EOS 0000000 000 0000000 ***
+Terminal output t13Cout.txt:
+    error(This account does not exist)
+
+
+Test  T13D: deleted acct (account name between 3 and 30 alphanumeric characters), error case
+Purpose: delete account name more than 30 alphanumeric characters
+Input t13Din.txt:
+    login
+    agent
+deleteacct
+    7965211
+    012345678901234567890123456789a
+logout    
+Input files: Valid Accounts File:
+7965211
+0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t13Dout.txt:
+    error(Your account name must be between 3 and 30 alphanumeric characters and not begin or end with a space)
+
+
+Test  T13E: deleted acct (account name between 3 and 30 alphanumeric characters), error case
+Purpose: delete account name less than 3 alphanumeric characters
+Input t13Ein.txt:
+    login
+    agent
+deleteacct
+    7965211
+    aa
+logout    
+Input files: Valid Accounts File:
+7965211
+0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t13Eout.txt:
+    error(Your account name must be between 3 and 30 alphanumeric characters and not begin or end with a space)
+
+
+Test  T14: deposit to an account, working case
+Purpose: Successful deposit of money to an account
+Input t14in.txt:
+    login
+    atm 
+deposit
+    7488316
+    003
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    DEP 7488316 003 0000000 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t14out.txt:
+    message(You have successfully deposited $0.03 to 748816)
+
+
+Test  T15A: deposit to an account, error case
+Purpose: deposits above $1,000.00 in atm mode should be rejected
+Input t15Ain.txt:
+    login
+    atm 
+deposit
+    7488316
+    100001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t15Aout.txt:
+    error(Your deposit is over the limit)
+
+
+Test  T15B: deposit to an account, error case
+Purpose: deposits above $999,999.99 in agent mode should be rejected
+Input t15Bin.txt:
+    login
+    agent
+deposit
+    7488316
+    100000000
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t15Bout.txt:
+    error(Your deposit is over the limit)
+
+
+Test  T15C: deposit with an invalid account number, error case
+Purpose: deposit from an invalid account number
+Input t15Cin.txt:
+    login
+    atm
+deposit
+    7488316
+    001
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t15Cout.txt:
+    error(Invalid account number)
+
+Test  T16: withdraw to an account, working case
+Purpose: successful withdraw from an account
+Input t16in.txt:
+    login
+    atm
+withdraw
+    7488316
+    1000
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    WDR 0000000 1000 7488316 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t16out.txt:
+    message(You have successfully withdrawn $1,000.00 from 7488316)
+
+
+Test  T17A: withdraw more than $1,000.00 in ATM mode, error case
+Purpose: withdrawal above $1,000.00 should be rejected in ATM mode
+Input t17Ain.txt:
+    login
+    atm
+withdraw
+    7488316
+    1001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t17Aout.txt:
+    error(You cannot withdraw more than $1,000.00)
+
+
+Test  T17B: More than $1,000.00 is withdrawn from a single account in single ATM session, error case
+Purpose: Total of at most $1,000.00 can be withdrawn from a single account in a single ATM session
+Input t17Bin.txt:
+    login
+    atm
+withdraw
+    7488316
+    1000
+    withdraw
+    7488316
+    001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    WDR 7488316 1000 0000000 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t17Bout.txt:
+    error(You cannot withdraw more than $1,000.00 from a single account in a single ATM session)
+
+
+Test  T17C: withdrawal with invalid account number , error case
+Purpose: withdrawal from an invalid account number
+Input t17Cin.txt:
+    login
+    atm
+withdraw
+    7488316
+    1000
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t17Cout.txt:
+    error(Invalid account number)
+
+
+Test  T18: Transfer to an account, working case
+Purpose: successful transfer from one account to another
+Input t18in.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    001
+logout    
+Input files: Valid Accounts File:
+    7488316
+1234567 
+    0000000
+Output files: Transaction Summary File:
+    XFR 1234567 001 7488316 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t18out.txt:
+    message(You have successfully transferred $0.01 to account 1234567)
+
+
+Test  T19A: Transfer more than $1,000.00, error case
+Purpose: transfers of over $1,000.00 in atm mode should be rejected
+Input t19Ain.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    100001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    1234567
+    0000000
+Output files: Transaction Summary File:
+EOS 0000000 000 0000000 ***
+Terminal output t19Aout.txt:
+    error(You cannot transfer more than $1,000.00)
+
+
+Test  T19B: Transfer more than $999,999.99 in agent mode, error case
+Purpose: transfers of over $999,999.99 in agent mode should be rejected
+Input t19Bin.txt:
+    login
+    agent
+transfer
+    7488316
+    1234567
+    100000000
+logout    
+Input files: Valid Accounts File:
+    7488316 
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t19Bout.txt:
+    error(You cannot transfer more than $999,999.99)
+
+
+Test  T19C: Transfer with invalid first account number, error case
+Purpose: Transfer from an invalid account number
+Input t19Cin.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    10000
+logout    
+Input files: Valid Accounts File:
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t19Cout.txt:
+    error(Invalid account number)
+
+
+Test  T19D: Transfer with invalid second account number, error case
+Purpose: Transfer to an invalid account number
+Input t19Din.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    10000
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t19Dout.txt:
+    error(Invalid account number)
+

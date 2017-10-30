@@ -1,0 +1,7 @@
+login
+atm
+transfer
+7488316
+1234567
+100001
+logout

@@ -1,0 +1,6 @@
+login
+atm
+deposit
+7488316
+001
+logout

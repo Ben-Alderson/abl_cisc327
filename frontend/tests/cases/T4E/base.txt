@@ -1,0 +1,14 @@
+Test  T4E: Transaction occur before login, error case  
+Purpose: No transaction (deleteacct) other than login should be accepted before login
+Input t4Ein.txt:
+    deleteacct
+    1234534
+    name
+Input files: Valid Accounts File:
+1234534
+0000000 
+Output files: Transaction Summary File with no transaction
+Terminal output t4Eout.txt:
+    error(You need to login first)
+
+

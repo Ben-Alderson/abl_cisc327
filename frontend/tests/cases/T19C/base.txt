@@ -1,0 +1,19 @@
+Test  T19C: Transfer with invalid first account number, error case
+Purpose: Transfer from an invalid account number
+Input t19Cin.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    10000
+logout    
+Input files: Valid Accounts File:
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t19Cout.txt:
+    error(Invalid account number)
+
+
