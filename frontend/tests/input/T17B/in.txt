@@ -1,0 +1,9 @@
+login
+atm
+withdraw
+7488316
+100000
+withdraw
+7488316
+100
+logout

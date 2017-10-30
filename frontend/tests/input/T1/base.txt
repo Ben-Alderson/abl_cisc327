@@ -1,0 +1,14 @@
+Test  T1: login command,ATM case 
+Purpose: check that login is accepted 
+Input t1in.txt:
+    login 
+    atm 
+    logout
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t1out.txt:
+    message(You have successfully logged out)
+
+

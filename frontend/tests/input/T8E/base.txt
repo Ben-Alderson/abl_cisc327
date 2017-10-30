@@ -1,0 +1,18 @@
+Test  T8E:  No transactions allowed after a logout, error case
+Purpose: No transaction (deleteacct) other than login should be accepted after a logout
+Input t8Ein.txt:
+    login
+    atm
+    logout
+    deleteacct
+    1234567
+    name
+Input files: Valid Accounts File:
+    1234567
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t8Eout.txt:
+    error(You must login to delete accounts)
+
+

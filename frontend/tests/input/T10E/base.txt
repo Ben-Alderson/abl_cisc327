@@ -1,0 +1,17 @@
+Test  T10E: createacct(account number not a number), error case
+Purpose: new account number must contain all numbers
+Input t10Ein.txt:
+    login
+    agent 
+createacct
+    3123a37
+    name
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t10Eout.txt:
+    error(New account number must be 7 numeric digits)
+
+

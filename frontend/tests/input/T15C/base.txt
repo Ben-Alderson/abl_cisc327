@@ -1,0 +1,16 @@
+Test  T15C: deposit with an invalid account number, error case
+Purpose: deposit from an invalid account number
+Input t15Cin.txt:
+    login
+    atm
+deposit
+    7488316
+    001
+logout    
+Input files: Valid Accounts File:
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t15Cout.txt:
+    error(Invalid account number)
+

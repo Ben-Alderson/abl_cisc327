@@ -1,0 +1,3 @@
+error(Your account number must be different from other current account numbers)
+
+

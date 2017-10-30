@@ -1,0 +1,18 @@
+Test  T11A: createacct(account name between 3 and 30 alphanumeric characters), error case
+Purpose: new account name under the minimum of 3 alphanumeric characters
+Input t11Ain.txt:
+    login
+    agent 
+createacct
+    2222222
+    aa
+logout    
+Input files:  Valid Accounts File:
+    0000000
+Output files: 
+Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t11Aout.txt:
+    error(Your account name must be between 3 and 30 alphanumeric characters)
+
+

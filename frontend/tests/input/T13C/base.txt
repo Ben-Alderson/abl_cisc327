@@ -1,0 +1,24 @@
+Test  T13C: Transactions are accepted on a deleted account, error case
+Purpose: No further transactions (transfer) should be accepted on a deleted account
+Input t13Cin.txt:
+    login
+    agent
+deleteacct
+    7965211
+    name
+    transfer
+    7965211
+    1234567
+    001
+logout    
+Input files: Valid Accounts File:
+    7965211
+1234567
+0000000
+Output files: Transaction Summary File:
+    DEL 7965211 000 0000000 name
+    EOS 0000000 000 0000000 ***
+Terminal output t13Cout.txt:
+    error(This account does not exist)
+
+

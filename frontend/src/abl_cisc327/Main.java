@@ -74,15 +74,15 @@ public class Main {
 	}
 	
 	// Makes sure first thing the user sees on screen is a login page.
-	private static void login() {
-		System.out.print("Enter login: ");
-		String user = input.nextLine().toLowerCase();
-		
+	private static void login() {		
 		if(isUserLoggedin) {
 			// Check no subsequent login should be accepted after a login
 			System.out.println("ERROR: You must first logout to login\n");
 			return;
 		}
+		
+		System.out.print("Enter login: ");
+		String user = input.nextLine().toLowerCase();
 		
 		if(user.equals("atm")) {
 			isUserLoggedin = true;
@@ -185,7 +185,7 @@ public class Main {
 			return;
 		}
 		
-		int transferAmount = Integer.parseInt(amount);
+		int transferAmount = validateAmount(amount);
 		int fromAccountNumber = validateAccountNumber(fromAccountNumberStr);
 		int toAccountNumber = validateAccountNumber(toAccountNumberStr);
 		
@@ -220,10 +220,12 @@ public class Main {
 		int accountNumber = validateAccountNumber(accountNumberStr);
 		String accountName = validateAccountName(accountNameStr);
 		
-		if(validAccounts.isValid(accountNumber)) {
+		if(!validAccounts.canBeCreated(accountNumber)) {
 			System.out.println("ERROR: Your account number must be different from other current account numbers");
 			return;
 		}
+		
+		validAccounts.newAccount(accountNumber);
 		
 		transactions.addCommand("NEW", accountNumber, 0, 0, accountName);
 		System.out.printf("You have successfully created a new account\n");

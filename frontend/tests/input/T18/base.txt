@@ -1,0 +1,21 @@
+Test  T18: Transfer to an account, working case
+Purpose: successful transfer from one account to another
+Input t18in.txt:
+    login
+    atm
+transfer
+    7488316
+    1234567
+    001
+logout    
+Input files: Valid Accounts File:
+    7488316
+1234567 
+    0000000
+Output files: Transaction Summary File:
+    XFR 1234567 001 7488316 ***
+    EOS 0000000 000 0000000 ***
+Terminal output t18out.txt:
+    message(You have successfully transferred $0.01 to account 1234567)
+
+

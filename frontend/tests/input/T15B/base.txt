@@ -1,0 +1,18 @@
+Test  T15B: deposit to an account, error case
+Purpose: deposits above $999,999.99 in agent mode should be rejected
+Input t15Bin.txt:
+    login
+    agent
+deposit
+    7488316
+    100000000
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t15Bout.txt:
+    error(Your deposit is over the limit)
+
+

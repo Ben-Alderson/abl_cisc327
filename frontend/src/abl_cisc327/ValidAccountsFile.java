@@ -10,12 +10,14 @@ import java.util.Scanner;
  */
 public class ValidAccountsFile {
 	private HashSet<Integer> validNumbers;
+	private HashSet<Integer> newNumbers;
 	
 	/*
 	 * Loads the valid accounts file from the path given in the argument.
 	 */
 	public ValidAccountsFile(String file) throws FileNotFoundException {
 		validNumbers = new HashSet<Integer>();
+		newNumbers = new HashSet<Integer>();
 		
 		Scanner reader = new Scanner(new File(file));
 		while(reader.hasNextLine()) {
@@ -26,6 +28,20 @@ public class ValidAccountsFile {
 			validNumbers.add(number);
 		}
 		reader.close();
+	}
+	
+	/*
+	 * Returns true if the account number has not already been created.
+	 */
+	public boolean canBeCreated(int accountNumber) {
+		return !isValid(accountNumber) && !newNumbers.contains(accountNumber);
+	}
+	
+	/*
+	 * Adds the new account to remember not to create it again.
+	 */
+	public void newAccount(int accountNumber) {
+		newNumbers.add(accountNumber);
 	}
 	
 	/*

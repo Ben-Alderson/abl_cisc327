@@ -1,0 +1,18 @@
+Test  T15A: deposit to an account, error case
+Purpose: deposits above $1,000.00 in atm mode should be rejected
+Input t15Ain.txt:
+    login
+    atm 
+deposit
+    7488316
+    100001
+logout    
+Input files: Valid Accounts File:
+    7488316
+    0000000
+Output files: Transaction Summary File:
+    EOS 0000000 000 0000000 ***
+Terminal output t15Aout.txt:
+    error(Your deposit is over the limit)
+
+

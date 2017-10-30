@@ -1,0 +1,16 @@
+Test  T4C: Transaction occur before login, error case  
+Purpose: No transaction (transfer) other than login should be accepted before login
+Input t4Cin.txt:
+    transfer
+1112231
+1442234
+    001
+Input files: Valid Accounts File:
+    1112231
+    1442234
+    0000000
+Output files: Transaction Summary File with no transaction
+Terminal output t4Cout.txt:
+    error(You need to login first)
+
+

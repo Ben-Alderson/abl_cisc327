@@ -1,0 +1,19 @@
+Test  T11C: createacct(account name 30 alphnumeric characters), working case
+Purpose: new account name at the maximum of 30 characters
+Input t11Cin.txt:
+    login
+    agent 
+createacct
+    2222222
+    012345678901234567890123456789
+logout    
+Input files:  Valid Accounts File:
+    0000000
+Output files: 
+Transaction Summary File:
+NEW 2222222 000 0000000 012345678901234567890123456789
+    EOS 0000000 000 0000000 ***
+Terminal output t11Cout.txt:
+    message(You have successfully created a new account)
+
+
