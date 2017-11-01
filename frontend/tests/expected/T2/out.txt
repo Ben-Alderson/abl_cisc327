@@ -1,3 +1,3 @@
-error(Invalid login)
-
-
+Enter command: Enter login: ERROR: Invalid login
+Enter command: ERROR: You must login before you logout
+Enter command: 

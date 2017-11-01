@@ -1,3 +1,2 @@
-error(You need to login first)
-
-
+Enter command: Enter the new account's number: Enter the new account's name: ERROR: You need to login first
+Enter command: 

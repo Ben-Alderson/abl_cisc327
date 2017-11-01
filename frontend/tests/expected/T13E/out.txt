@@ -1,3 +1,2 @@
-error(Your account name must be between 3 and 30 alphanumeric characters and not begin or end with a space)
-
-
+Enter command: Enter login: Enter command: Enter the target account's number: Enter the target account's name: ERROR: Your account name must be between 3 and 30 alphanumeric characters and not begin or end with a space
+Enter command: Enter command: 

@@ -2,3 +2,5 @@ login
 atm
 logout
 deposit
+1234567
+100

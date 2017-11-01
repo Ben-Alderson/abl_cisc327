@@ -1,3 +1,2 @@
-error(You cannot delete account)
-
-
+Enter command: Enter login: Enter command: Enter the target account's number: Enter the target account's name: ERROR: You cannot delete an account
+Enter command: Enter command: 

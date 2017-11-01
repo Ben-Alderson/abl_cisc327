@@ -1,3 +1,2 @@
-error(You must login to deposit)
-
-
+Enter command: Enter login: Enter command: Enter command: Enter the account to deposit: Enter the amount to deposit: ERROR: You need to login first
+Enter command: 

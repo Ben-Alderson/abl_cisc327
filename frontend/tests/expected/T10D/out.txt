@@ -1,3 +1,2 @@
-error(Your account number must be different from other current account numbers)
-
-
+Enter command: Enter login: Enter command: Enter the new account's number: Enter the new account's name: ERROR: Your account number must be different from other current account numbers
+Enter command: Enter command: 

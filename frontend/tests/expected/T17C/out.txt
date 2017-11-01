@@ -1,3 +1,2 @@
-error(Invalid account number)
-
-
+Enter command: Enter login: Enter command: Enter the account to withdraw: Enter amount to withdraw: ERROR: invalid account number
+Enter command: Enter command: 

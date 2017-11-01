@@ -1,3 +1,2 @@
-message(Account deleted)
-
-
+Enter command: Enter login: Enter command: Enter the target account's number: Enter the target account's name: Account deleted
+Enter command: Enter command: 

@@ -1,3 +1,2 @@
-message(You have successfully transferred $0.01 to account 1234567)
-
-
+Enter command: Enter login: Enter command: Enter the account number to transfer from: Enter the account number to transfer to: Enter amount to transfer: You have successfully tranferred $0.01 to 1234567
+Enter command: Enter command: 

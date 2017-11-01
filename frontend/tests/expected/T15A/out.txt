@@ -1,3 +1,2 @@
-error(Your deposit is over the limit)
-
-
+Enter command: Enter login: Enter command: Enter the account to deposit: Enter the amount to deposit: ERROR: Can't transfer more than $1,000.00
+Enter command: Enter command: 

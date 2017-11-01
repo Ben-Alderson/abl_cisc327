@@ -2,6 +2,7 @@ package abl_cisc327;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 // The Main class is to parse and execute commands and core functions of the program.
@@ -11,6 +12,7 @@ public class Main {
 	static boolean isUserAgent = false;
 	static ValidAccountsFile validAccounts;
 	static TransactionSummaryFile transactions;
+	static HashMap<Integer, Integer> withdrawTotal;
 	static Scanner input;
 	
 	// The purpose of this function is to call on all the 
@@ -87,10 +89,12 @@ public class Main {
 		if(user.equals("atm")) {
 			isUserLoggedin = true;
 			isUserAgent = false;
+			withdrawTotal = new HashMap<Integer, Integer>();
 		}
 		else if(user.equals("agent")) {
 			isUserLoggedin = true;
 			isUserAgent = true;
+			withdrawTotal = new HashMap<Integer, Integer>();
 		}
 		else {
 			System.out.println("ERROR: Invalid login");
@@ -159,6 +163,17 @@ public class Main {
 		
 		int accountNumber = validateAccountNumber(accountNumberStr);
 		int withdrawAmount = validateAmount(amountStr);
+		
+		int previousWithdrawn = 0;
+		if(withdrawTotal.containsKey(accountNumber)) {
+			previousWithdrawn = withdrawTotal.get(accountNumber);
+		}
+		
+		if(previousWithdrawn + withdrawAmount > 100000 && !isUserAgent) {
+			System.out.println("ERROR: You cannot withdraw more than $1,000.00 from a single account in a single ATM session");
+			return;
+		}
+		withdrawTotal.put(accountNumber, previousWithdrawn + withdrawAmount);
 		
 		if(!validAccounts.isValid(accountNumber)) {
 			System.out.println("ERROR: invalid account number");

@@ -1,3 +1,2 @@
-error(You must login to withdraw)
-
-
+Enter command: Enter login: Enter command: Enter command: Enter the account to withdraw: Enter amount to withdraw: ERROR: You need to login first
+Enter command: 
