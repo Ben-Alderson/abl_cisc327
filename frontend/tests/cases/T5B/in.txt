@@ -1,6 +1,0 @@
-login
-atm
-deleteacct
-1123142
-name
-logout

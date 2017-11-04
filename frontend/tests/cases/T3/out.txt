@@ -1,3 +1,0 @@
-error(You must first log out to log in)
-
-

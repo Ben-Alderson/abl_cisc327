@@ -1,3 +1,0 @@
-error(Your deposit is over the limit)
-
-

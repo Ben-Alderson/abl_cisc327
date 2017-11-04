@@ -1,3 +1,0 @@
-error(New account number must be 7 numeric digits)
-
-

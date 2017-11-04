@@ -1,6 +1,0 @@
-login
-atm
-createacct
-1123142
-name
-logout

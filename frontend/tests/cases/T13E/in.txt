@@ -1,6 +1,0 @@
-login
-agent
-deleteacct
-7965211
-aa
-logout

@@ -1,9 +1,0 @@
-login
-agent 
-deleteacct
-7965211
-name
-withdraw
-7965211
-001
-logout

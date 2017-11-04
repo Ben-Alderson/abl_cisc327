@@ -1,3 +1,0 @@
-error(You must have account start with number other than 0)
-
-

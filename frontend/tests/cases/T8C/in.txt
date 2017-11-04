@@ -1,7 +1,0 @@
-login
-atm
-logout
-transfer
-1234567
-7654321
-001

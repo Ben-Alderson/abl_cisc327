@@ -1,9 +1,0 @@
-login
-atm
-withdraw
-7488316
-1000
-withdraw
-7488316
-001
-logout

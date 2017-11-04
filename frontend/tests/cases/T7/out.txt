@@ -1,3 +1,0 @@
-error(You must login before you can log out)
-
-

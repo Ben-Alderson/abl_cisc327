@@ -1,3 +1,0 @@
-error(You must have account with 7 decimal digits)
-
-
