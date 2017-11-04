@@ -15,26 +15,26 @@ for folder in $(ls -v input); do
 
     # Print out the diff if it failed
     if [ $OUTPUT_CODE != 0 ]; then
+        THERE_WERE_PROBLEMS=1
         echo -e "${YELLOW}$folder${RESET} - Terminal output didn't match: ${RED}"
         diff expected/$folder/out.txt output/$folder/out.log
         echo -ne "${RESET}"
-        THERE_WERE_PROBLEMS=1
         echo
     fi
 
     # Check that we actually have a file
     if [ -f expected/$folder/transaction_summary.txt ]; then
-        diff expected/$folder/transaction_summary.txt output/$folder/transaction_summary.log > /dev/null
+        diff -s expected/$folder/transaction_summary.txt output/$folder/transaction_summary.log > /dev/null
         TRANSACTION_CODE=$?
     else
         TRANSACTION_CODE=0
     fi
 
     if [ $TRANSACTION_CODE != 0 ]; then
+        THERE_WERE_PROBLEMS=1
         echo -e "${YELLOW}$folder${RESET} - Transaction summary didn't match: ${RED}"
         diff expected/$folder/transaction_summary.txt output/$folder/transaction_summary.log
         echo -ne "${RESET}"
-        THERE_WERE_PROBLEMS=1
         echo
     fi
 done
