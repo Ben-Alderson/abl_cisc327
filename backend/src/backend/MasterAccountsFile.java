@@ -6,9 +6,17 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+/*
+ * The MasterAccountsFile class sorts the accounts in ascending order.
+ * The class ensures the account numbers, monetary amounts and account
+ * names are correctly logged for the transaction summary file above.
+ */
 public class MasterAccountsFile {
 	TreeMap<Integer, Account> accounts;
 	
+	/*
+	 * Loads the master accounts file from the file located at the given path.
+	 */
 	public MasterAccountsFile(String fileName) {
 		accounts = new TreeMap<Integer, Account>();
 		
@@ -24,18 +32,31 @@ public class MasterAccountsFile {
 		file.close();
 	}
 	
+	/*
+	 * Gets an account by the account number.
+	 */
 	public Account get(int accountNumber) {
 		return accounts.get(accountNumber);
 	}
 	
+	/*
+	 * Adds the account to the master accounts file with the given account number.
+	 */
 	public void create(int accountNumber, Account account) {
 		accounts.put(accountNumber, account);
 	}
 	
+	/*
+	 * Deletes the account with the given account number.
+	 */
 	public void delete(int accountNumber) {
 		accounts.remove(accountNumber);
 	}
 	
+	/*
+	 * Writes the valid accounts file and the new master accounts
+	 * file to the given paths and throws all input and output exceptions.
+	 */
 	public void write(String masterFileName, String validFileName) throws IOException {
 		FileWriter masterFile = new FileWriter(new File(masterFileName), true);
 		FileWriter validFile = new FileWriter(new File(validFileName), true);
