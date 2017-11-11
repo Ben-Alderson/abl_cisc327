@@ -173,13 +173,13 @@ public class Main {
 			System.out.println("ERROR: You cannot withdraw more than $1,000.00 from a single account in a single ATM session");
 			return;
 		}
-		withdrawTotal.put(accountNumber, previousWithdrawn + withdrawAmount);
 		
 		if(!validAccounts.isValid(accountNumber)) {
 			System.out.println("ERROR: invalid account number");
 			return;
 		}
 		
+		withdrawTotal.put(accountNumber, previousWithdrawn + withdrawAmount);
 		transactions.addCommand("WDR", 0, withdrawAmount, accountNumber, null);
 		System.out.printf("You have successfully withdrawn $%.2f from %d\n", ((float) withdrawAmount)/100, accountNumber);
 	}
