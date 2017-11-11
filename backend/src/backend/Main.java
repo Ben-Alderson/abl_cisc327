@@ -61,7 +61,7 @@ public class Main {
 
 	private static void transfer(int accountNumberFrom, int accountNumberTo, int amount) {
 		Account theAccountFrom = accounts.get(accountNumberFrom);
-		Account theAccountTo = accounts.get(accountNumberFrom);
+		Account theAccountTo = accounts.get(accountNumberTo);
 		
 		if(theAccountFrom.balance < amount) {
 			System.out.println("ERROR: No account should ever have a negative balance");
