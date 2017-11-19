@@ -14,4 +14,8 @@ public class Account {
 		this.name = accountName;
 		this.balance = balance;
 	}
+	
+	public boolean equals(Account other) {
+		return this.name == other.name && this.balance == other.balance;
+	}
 }

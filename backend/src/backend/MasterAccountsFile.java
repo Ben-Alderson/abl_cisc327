@@ -32,6 +32,10 @@ public class MasterAccountsFile {
 		file.close();
 	}
 	
+	public MasterAccountsFile() {
+		accounts = new TreeMap<Integer, Account>();
+	}
+	
 	/*
 	 * Gets an account by the account number.
 	 */

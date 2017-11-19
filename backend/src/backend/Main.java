@@ -46,10 +46,10 @@ public class Main {
 				transfer(accountNumberFrom, accountNumberTo, amount);
 				break;
 			case "NEW":
-				createacct(accountNumberFrom, accountName);
+				createacct(accountNumberTo, accountName);
 				break;
 			case "DEL":
-				deleteacct(accountNumberFrom, accountName);
+				deleteacct(accountNumberTo, accountName);
 				break;
 			case "EOS":
 				break;
@@ -103,7 +103,7 @@ public class Main {
 	 * it fails. If there isn’t any, create a new account. 
 	 */
 	private static void createacct(int accountNumber, String name) {
-		if(accounts.get(accountNumber) == null) {
+		if(accounts.get(accountNumber) != null) {
 			System.out.println("ERROR: Created account must have a new unused account number");
 			return;
 		}
@@ -130,5 +130,46 @@ public class Main {
 		
 		accounts.delete(accountNumber);
 	}
-
+	
+	public static void runTests() {
+		testCreateAccount();
+		testWithdraw();
+	}
+	
+	private static void testWithdraw() {
+		// T3
+		Main.accounts = new MasterAccountsFile();
+		Main.accounts.create(1234567, new Account("Batman", 100));
+		Main.withdraw(1234567, 100);
+		if(!Main.accounts.get(1234567).equals(new Account("Batman", 0))) {
+			System.out.println("T3 failed");
+		}
+		
+		// T4
+		Main.accounts = new MasterAccountsFile();
+		Main.accounts.create(1234567, new Account("Batman", 100));
+		Main.withdraw(1234567, 200);
+		if(!Main.accounts.get(1234567).equals(new Account("Batman", 100))) {
+			System.out.println("T4 failed");
+		}
+	}
+	
+	private static void testCreateAccount() {
+		// T1
+		Main.accounts = new MasterAccountsFile();
+		Main.accounts.create(1234567, new Account("Joker", 100));
+		Main.createacct(1234567, "Batman");
+		if(!Main.accounts.get(1234567).equals(new Account("Joker", 100))) {
+			System.out.println("T1 failed");
+		}
+		
+		// T2
+		Main.accounts = new MasterAccountsFile();
+		Main.createacct(1234567, "Batman");
+		if(!Main.accounts.get(1234567).equals(new Account("Batman", 0))) {
+			System.out.println("T2 failed");
+		}
+	}
 }
+
+
