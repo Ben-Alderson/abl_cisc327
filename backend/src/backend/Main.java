@@ -9,6 +9,7 @@
 
 package backend;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ public class Main {
 	 * and throws all input and output exceptions.
 	 */
 	public static void main(String[] args) throws IOException {
-		Scanner transactions = new Scanner(args[0]);
+		Scanner transactions = new Scanner(new File(args[0]));
 		accounts = new MasterAccountsFile(args[1]);
 		
 		while(transactions.hasNextLine()) {

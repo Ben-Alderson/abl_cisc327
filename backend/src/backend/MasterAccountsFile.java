@@ -1,6 +1,7 @@
 package backend;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,10 +18,10 @@ public class MasterAccountsFile {
 	/*
 	 * Loads the master accounts file from the file located at the given path.
 	 */
-	public MasterAccountsFile(String fileName) {
+	public MasterAccountsFile(String fileName) throws FileNotFoundException {
 		accounts = new TreeMap<Integer, Account>();
 		
-		Scanner file = new Scanner(fileName);
+		Scanner file = new Scanner(new File(fileName));
 		while(file.hasNextLine()) {
 			String[] line = file.nextLine().split(" ", 3);
 			int accountNumber = Integer.parseInt(line[0], 10);
@@ -62,16 +63,16 @@ public class MasterAccountsFile {
 	 * file to the given paths and throws all input and output exceptions.
 	 */
 	public void write(String masterFileName, String validFileName) throws IOException {
-		FileWriter masterFile = new FileWriter(new File(masterFileName), true);
-		FileWriter validFile = new FileWriter(new File(validFileName), true);
+		FileWriter masterFile = new FileWriter(new File(masterFileName), false);
+		FileWriter validFile = new FileWriter(new File(validFileName), false);
 		
 		for(Integer accountNumber: accounts.keySet()) {
 			Account currentAccount = accounts.get(accountNumber);
 			masterFile.write(accountNumber.toString());
 			masterFile.write(" ");
-			masterFile.write(currentAccount.balance);
+			masterFile.write(Integer.toString(currentAccount.balance));
 			masterFile.write(" ");
-			masterFile.write(currentAccount.name);
+			masterFile.write(currentAccount.name.toString());
 			masterFile.write("\n");
 			
 			validFile.write(accountNumber.toString());
