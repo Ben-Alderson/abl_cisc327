@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Run this script with no arguments to run the frontend and backend for a day's worth of inputs.
+# Expects to be run when current directory is the same directory that script is in.
+# Reads from the files in the inputs folder.
+
 rm transaction_summaries/*
 rm merged
 
