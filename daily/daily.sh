@@ -4,6 +4,7 @@
 # Expects to be run when current directory is the same directory that script is in.
 # Reads from the files in the inputs folder.
 
+mkdir -p transaction_summaries
 rm transaction_summaries/*
 rm merged
 

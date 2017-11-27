@@ -18,5 +18,4 @@ for DAY in days/*; do
     cd ../daily
     ./daily.sh
     cd $START_DIR
-    read
 done
